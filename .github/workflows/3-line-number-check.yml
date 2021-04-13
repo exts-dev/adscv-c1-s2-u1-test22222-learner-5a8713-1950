@@ -1,0 +1,16 @@
+name: 3. Line Number Check
+on: push
+jobs:
+  count-line-number:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Count file lines
+      id: lines
+      run: echo "::set-output name=count::$(wc -l index.html | awk '{print $1;}')"
+
+    - name: Count valid
+      if: ${{ steps.lines.outputs.count == '' || steps.lines.outputs.count < 50 }}
+      run: exit 1

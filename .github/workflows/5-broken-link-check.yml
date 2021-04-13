@@ -1,0 +1,14 @@
+name: 5. Broken Link Check
+on: push
+jobs:
+  check-broken-link:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Check for broken links
+      id: link-report
+      uses: lycheeverse/lychee-action@v1.0.6
+      with:
+        args: --verbose --no-progress *.html

@@ -1,0 +1,18 @@
+name: 2. Find Tags
+on: push
+jobs:
+  find-specific-tags:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Find main tag
+      id: find-main
+      uses: nguyenvanuyn96/str-find-action@master
+      with:
+        find: "<main>" # header, main, footer, h1, h2, h3
+        include: "index.html" #"albums.html" #, concerts.html, contact.html, home.html"
+    - name: Tag main exists
+      if: ${{ steps.find-main.outputs.fileFoundCount == 0 }}
+      run: exit 1

@@ -1,0 +1,14 @@
+name: 1. Find Files
+on: push
+jobs:
+  find-specific-files:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Check file existence
+      uses: andstor/file-existence-action@v1
+      with:
+        files: "albums.html, concerts.html, contact.html, home.html"
+        allow_failure: true
